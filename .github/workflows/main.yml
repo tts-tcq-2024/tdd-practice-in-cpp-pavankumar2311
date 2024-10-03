@@ -13,8 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - name: Use Node.js 20
+      uses: actions/setup-node@v3
+      with:
+          node-version: '20'
 
        
     - name: Set up CMake
@@ -50,7 +52,7 @@ jobs:
       run: gcovr --gcov-exclude=".*Tests.*" --gcov-exclude=".*test.*" -r . --html --html-details -o coverage.html --print-summary
 
     - name: create coverage artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: coverage
         path: ./*.html
